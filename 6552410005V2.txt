@@ -1,0 +1,28 @@
+วัตถุประสงค์ของระบบ
+ - แยกการใช้งานของหน่วยงานแต่ละคณะออกจากกันด้วย VLAN และ Subnet
+ - มีการเชื่อมต่ออินเทอร์เน็ตผ่าน ISP
+ - มีการเชื่อมต่อ Web Server
+ - มีการใช้ DNS
+ - มีการใช้ Routing Protocol แบบ Static และ RIP
+
+ผัง Network
+ องค์กรมีขนาดเล็ก
+  - VLAN 10, VLAN20
+  - Data Center (Web Server) ขององค์กรเอง สามารถเข้าใช้งานด้วยเครือข่ายภายนอกได้ โดยคาดว่าจะแล้วเสร็จใน V.2
+
+การแบ่งเครือข่าย (IP/Subnet/VLAN)
+ VLAN	   Subnet	        IP Gateway
+ 10	   192.168.10.0/24	192.168.10.1
+ 20	   192.168.20.0/24	192.168.20.1
+
+อุปกรณ์ที่ใช้
+Router	5	R1: องกรณ์, Router A: ISP + DNS, Router B: Web Server, Router C: Web Server
+Switch	4	กำหนด VLAN | Switch1: ใช้กับ Switch2, Switch3 | Switch2: ใช้กับ VLAN 10, 20 | Switch3: ใช้กับ VLAN 30, 40 | Switch4: ไม่ทำ Subnet
+Web Server	4 ให้บริการเว็บไซต์ 3 และ DNS 1
+
+การเชื่อมต่อ
+Router A: เป็น ISP ให้บริการ DNS, เชื่อมกับ R1 เพื่อเชื่อม Switch ของแต่ละ VLAN
+Router B: เป็น ISP เชื่อมกับ Web Server และ Home Router
+Router C: เป็น ISP เชื่อมกับ Web Server
+R1: เป็น Router ขององกรณ์แห่งนึง
+Home Router: เป็น Router ของผู้ใช้ทั่วไป
